@@ -1,3 +1,11 @@
 apply plugin: 'java'
 apply plugin: 'application'
 mainClassName = "kek.pepega.pft.MyFirstProgram"
+
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    implementation group: 'org.netbeans.external', name: 'testng-6.8.1-dist', version: 'RELEASE121'
+}

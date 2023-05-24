@@ -2,14 +2,13 @@ package kek.pepega.pft;
 
 public class Square {
 
-    public double X;
+        public double l;
 
-    public Square(double X) {
 
-        this.X = X;
-    }
-    public double area () {
-        return this.X * this.X;
-    }
-
+        public Square(double l) {
+            this.l = l;
+        }
+        public double area() {
+            return this.l * l;
+        }
 }
