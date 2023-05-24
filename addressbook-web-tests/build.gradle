@@ -1,0 +1,10 @@
+apply plugin: 'java'
+
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    implementation group: 'org.netbeans.external', name: 'testng-6.8.1-dist', version: 'RELEASE121'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.9.1'
+}
