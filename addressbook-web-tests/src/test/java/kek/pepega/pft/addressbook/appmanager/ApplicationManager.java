@@ -1,7 +1,6 @@
 package kek.pepega.pft.addressbook.appmanager;
 
 import kek.pepega.pft.addressbook.model.ContactDate;
-import kek.pepega.pft.addressbook.model.GroupDate;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
@@ -13,47 +12,21 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
     public WebDriver wd;
 
+    private SessionHelper sessionHelper;
+    private NavigationHelper navigationHelper;
+    private GroupHelper groupHelper;
+
     public void init() {
-        wd = new ChromeDriver();
-        wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        wd.get("http://localhost/addressbook/");
-        login("admin", "secret");
+       wd = new ChromeDriver();
+       wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+       wd.get("http://localhost/addressbook/");
+        groupHelper = new GroupHelper(wd);
+        navigationHelper = new NavigationHelper(wd);
+        sessionHelper = new SessionHelper(wd);
+        sessionHelper.login("admin", "secret");
     }
 
-    public void login(String username, String password) {
-        wd.findElement(By.name("user")).click();
-        wd.findElement(By.name("user")).clear();
-        wd.findElement(By.name("user")).sendKeys(username);
-        wd.findElement(By.name("pass")).click();
-        wd.findElement(By.name("pass")).clear();
-        wd.findElement(By.name("pass")).sendKeys(password);
-        wd.findElement(By.xpath("//input[@value='Login']")).click();
-        wd.findElement(By.xpath("//*/text()[normalize-space(.)='']/parent::*")).click();
-    }
 
-    public void submitGroupCreation() {
-        wd.findElement(By.name("submit")).click();
-    }
-
-    public void fillGroupForm(GroupDate groupDate) {
-        wd.findElement(By.name("group_name")).click();
-        wd.findElement(By.name("group_name")).clear();
-        wd.findElement(By.name("group_name")).sendKeys(groupDate.name());
-        wd.findElement(By.name("group_header")).click();
-        wd.findElement(By.name("group_header")).clear();
-        wd.findElement(By.name("group_header")).sendKeys(groupDate.header());
-        wd.findElement(By.name("group_footer")).click();
-        wd.findElement(By.name("group_footer")).clear();
-        wd.findElement(By.name("group_footer")).sendKeys(groupDate.footer());
-    }
-
-    public void initGroupCreation() {
-        wd.findElement(By.name("new")).click();
-    }
-
-    public void goToGroupPage() {
-        wd.findElement(By.linkText("groups")).click();
-    }
 
     public void stop() {
         logout();
@@ -80,14 +53,6 @@ public class ApplicationManager {
         } catch (NoAlertPresentException e) {
             return false;
         }
-    }
-
-    public void deleteSelectionGroups() {
-        wd.findElement(By.name("delete")).click();
-    }
-
-    public void selectGroup() {
-        wd.findElement(By.name("selected[]")).click();
     }
 
     public void fillContactForm(ContactDate contactData) {
@@ -130,6 +95,14 @@ public class ApplicationManager {
 
     public void goToCreateNewContactPage() {
         wd.findElement(By.linkText("add new")).click();
+    }
+
+    public GroupHelper getGroupHelper() {
+        return groupHelper;
+    }
+
+    public NavigationHelper getNavigationHelper() {
+        return navigationHelper;
     }
 }
 
