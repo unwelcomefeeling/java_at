@@ -30,14 +30,14 @@ public class ContactCreationTests {
     }
 
     @Test
-    public void testContactCreation(String firstname, String middlename, String lastname, String nickname, String title, String company, String address, String mobile, String email, String bday, String bmonth, String byear) throws Exception {
+    public void testContactCreation() throws Exception {
         goToCreateNewContactPage();
-        fillContactForm(new ContactData(firstname, middlename, lastname, nickname, title, company, address, mobile, email, bday, bmonth, byear));
+        fillContactForm(new ContactDate("PEPEGA", "Kekovna", "Mekov", "123", "321", "sber", "lodochnaya 12, квартира 82", "12455333", "лулул@yandex.ru"));
         submitCreateContact();
         goHomePage();
     }
 
-    private void fillContactForm(ContactData contactData) {
+    private void fillContactForm(ContactDate contactData) {
         wd.findElement(By.name("firstname")).click();
         wd.findElement(By.name("firstname")).clear();
         wd.findElement(By.name("firstname")).sendKeys(contactData.firstname());
@@ -65,13 +65,6 @@ public class ContactCreationTests {
         wd.findElement(By.name("email")).click();
         wd.findElement(By.name("email")).clear();
         wd.findElement(By.name("email")).sendKeys(contactData.email());
-        wd.findElement(By.name("bday")).click();
-        new Select(wd.findElement(By.name("bday"))).selectByVisibleText(contactData.bday());
-        wd.findElement(By.name("bmonth")).click();
-        new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(contactData.bmonth());
-        wd.findElement(By.name("byear")).click();
-        wd.findElement(By.name("byear")).clear();
-        wd.findElement(By.name("byear")).sendKeys(contactData.byear());
     }
 
     private void submitCreateContact() {
