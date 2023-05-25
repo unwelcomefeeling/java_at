@@ -2,6 +2,7 @@ package kek.pepega.pft.addressbook;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -35,6 +36,7 @@ public class GroupCreationTests {
         fillGroupForm(new GroupDate("test1", "test2", "test3"));
         submitGroupCreation();
         goToGroupPage();
+
     }
 
     private void submitGroupCreation() {
