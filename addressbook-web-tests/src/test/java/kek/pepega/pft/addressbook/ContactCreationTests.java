@@ -8,7 +8,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class ContactCreationTests {
-
     private WebDriver wd;
 
     @BeforeMethod(alwaysRun = true)
