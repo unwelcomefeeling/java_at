@@ -1,24 +1,26 @@
-package kek.pepega.pft.addressbook;
+package kek.pepega.pft.addressbook.appmanager;
+
+import kek.pepega.pft.addressbook.model.ContactDate;
+import kek.pepega.pft.addressbook.model.GroupDate;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.support.ui.Select;
-import org.testng.annotations.*;
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
+public class ApplicationManager {
+    public WebDriver wd;
 
-public class ContactCreationTests {
-    private WebDriver wd;
-
-    @BeforeMethod(alwaysRun = true)
-    public void setUp() throws Exception {
+    public void init() {
         wd = new ChromeDriver();
         wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/");
         login("admin", "secret");
     }
 
-    private void login(String username, String password) {
+    public void login(String username, String password) {
         wd.findElement(By.name("user")).click();
         wd.findElement(By.name("user")).clear();
         wd.findElement(By.name("user")).sendKeys(username);
@@ -29,15 +31,66 @@ public class ContactCreationTests {
         wd.findElement(By.xpath("//*/text()[normalize-space(.)='']/parent::*")).click();
     }
 
-    @Test
-    public void testContactCreation() throws Exception {
-        goToCreateNewContactPage();
-        fillContactForm(new ContactDate("PEPEGA", "Kekovna", "Mekov", "123", "321", "sber", "lodochnaya 12, квартира 82", "12455333", "лулул@yandex.ru"));
-        submitCreateContact();
-        goHomePage();
+    public void submitGroupCreation() {
+        wd.findElement(By.name("submit")).click();
     }
 
-    private void fillContactForm(ContactDate contactData) {
+    public void fillGroupForm(GroupDate groupDate) {
+        wd.findElement(By.name("group_name")).click();
+        wd.findElement(By.name("group_name")).clear();
+        wd.findElement(By.name("group_name")).sendKeys(groupDate.name());
+        wd.findElement(By.name("group_header")).click();
+        wd.findElement(By.name("group_header")).clear();
+        wd.findElement(By.name("group_header")).sendKeys(groupDate.header());
+        wd.findElement(By.name("group_footer")).click();
+        wd.findElement(By.name("group_footer")).clear();
+        wd.findElement(By.name("group_footer")).sendKeys(groupDate.footer());
+    }
+
+    public void initGroupCreation() {
+        wd.findElement(By.name("new")).click();
+    }
+
+    public void goToGroupPage() {
+        wd.findElement(By.linkText("groups")).click();
+    }
+
+    public void stop() {
+        logout();
+        wd.quit();
+    }
+
+    public void logout() {
+        wd.findElement(By.linkText("Logout")).click();
+    }
+
+    public boolean isElementPresent(By by) {
+        try {
+            wd.findElement(by);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    public boolean isAlertPresent() {
+        try {
+            wd.switchTo().alert();
+            return true;
+        } catch (NoAlertPresentException e) {
+            return false;
+        }
+    }
+
+    public void deleteSelectionGroups() {
+        wd.findElement(By.name("delete")).click();
+    }
+
+    public void selectGroup() {
+        wd.findElement(By.name("selected[]")).click();
+    }
+
+    public void fillContactForm(ContactDate contactData) {
         wd.findElement(By.name("firstname")).click();
         wd.findElement(By.name("firstname")).clear();
         wd.findElement(By.name("firstname")).sendKeys(contactData.firstname());
@@ -67,43 +120,16 @@ public class ContactCreationTests {
         wd.findElement(By.name("email")).sendKeys(contactData.email());
     }
 
-    private void submitCreateContact() {
+    public void submitCreateContact() {
         wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
     }
 
-    private void goHomePage() {
+    public void goHomePage() {
         wd.findElement(By.linkText("home page")).click();
     }
 
-    private void goToCreateNewContactPage() {
+    public void goToCreateNewContactPage() {
         wd.findElement(By.linkText("add new")).click();
     }
-
-    @AfterMethod(alwaysRun = true)
-    public void tearDown() throws Exception {
-        logout();
-        wd.quit();
-    }
-
-    private void logout() {
-        wd.findElement(By.linkText("Logout")).click();
-    }
-
-    private boolean isElementPresent(By by) {
-        try {
-            wd.findElement(by);
-            return true;
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-    }
-
-    private boolean isAlertPresent() {
-        try {
-            wd.switchTo().alert();
-            return true;
-        } catch (NoAlertPresentException e) {
-            return false;
-        }
-    }
 }
+
