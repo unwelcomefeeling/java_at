@@ -46,14 +46,7 @@ public class ApplicationManager {
         }
     }
 
-    public boolean isAlertPresent() {
-        try {
-            wd.switchTo().alert();
-            return true;
-        } catch (NoAlertPresentException e) {
-            return false;
-        }
-    }
+
 
     public void fillContactForm(ContactDate contactData) {
         wd.findElement(By.name("firstname")).click();
