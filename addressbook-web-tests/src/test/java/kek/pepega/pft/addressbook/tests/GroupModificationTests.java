@@ -1,2 +1,17 @@
-package kek.pepega.pft.addressbook.tests;public class GroupModificationTests {
+package kek.pepega.pft.addressbook.tests;
+
+import kek.pepega.pft.addressbook.model.GroupData;
+import org.testng.annotations.Test;
+
+public class GroupModificationTests extends TestBase {
+
+    @Test
+    public void testGroupModification () {
+        app.getNavigationHelper().goToGroupPage();
+        app.getGroupHelper().selectGroup();
+        app.getGroupHelper().initGroupModification();
+        app.getGroupHelper().fillGroupForm(new GroupData("test1", "test2", "test3"));
+        app.getGroupHelper().submitGroupModification();
+        app.getNavigationHelper().goToGroupPage();
+    }
 }

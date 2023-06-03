@@ -1,6 +1,6 @@
 package kek.pepega.pft.addressbook.tests;
 
-import kek.pepega.pft.addressbook.model.GroupDate;
+import kek.pepega.pft.addressbook.model.GroupData;
 import org.testng.annotations.*;
 
 public class GroupCreationTests extends TestBase {
@@ -9,7 +9,7 @@ public class GroupCreationTests extends TestBase {
     public void testGroupCreation() throws Exception {
         app.getNavigationHelper().goToGroupPage();
         app.getGroupHelper().initGroupCreation();
-        app.getGroupHelper().fillGroupForm(new GroupDate("test1", "test2", "test3"));
+        app.getGroupHelper().fillGroupForm(new GroupData("test1", "test2", "test3"));
         app.getGroupHelper().submitGroupCreation();
         app.getNavigationHelper().goToGroupPage();
 

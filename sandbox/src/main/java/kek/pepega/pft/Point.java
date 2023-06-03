@@ -2,19 +2,24 @@ package kek.pepega.pft;
 
 public class Point {
 
-    public double x1;
-    public double x2;
-    public double y1;
-    public double y2;
+    public double x;
+    public double y;
 
-    public Point(double x1, double y1, double x2, double y2){
-        this.x2=x2;
-        this.y2=y2;
-        this.x1=x1;
-        this.y1=y1;
+
+    Point (double x, double y){
+        this.x=x;
+        this.y=y;
     }
-    public double distance() {
-        return Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+
+    double distance(double x, double y){
+        double dx=this.x-x;
+        double dy=this.y-y;
+        return Math.sqrt(dx * dx + dy * dy);
     }
+
+    double distance (Point p) {
+        return distance(p.x, p.y);
+    }
+
 }
 

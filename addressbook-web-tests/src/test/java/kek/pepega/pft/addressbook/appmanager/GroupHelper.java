@@ -1,6 +1,6 @@
 package kek.pepega.pft.addressbook.appmanager;
 
-import kek.pepega.pft.addressbook.model.GroupDate;
+import kek.pepega.pft.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -15,10 +15,10 @@ public class GroupHelper extends HelperBase{
         click(By.name("submit"));
     }
 
-    public void fillGroupForm(GroupDate groupDate) {
-        type(By.name("group_name"), groupDate.name());
-        type(By.name("group_header"), groupDate.header());
-        type(By.name("group_footer"), groupDate.footer());
+    public void fillGroupForm(GroupData groupData) {
+        type(By.name("group_name"), groupData.name());
+        type(By.name("group_header"), groupData.header());
+        type(By.name("group_footer"), groupData.footer());
     }
 
     public void initGroupCreation() {
@@ -31,5 +31,13 @@ public class GroupHelper extends HelperBase{
 
     public void selectGroup() {
         click(By.name("selected[]"));
+    }
+
+    public void initGroupModification() {
+        click(By.name("edit"));
+    }
+
+    public void submitGroupModification() {
+        click(By.name("update"));
     }
 }

@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 
 public class HelperBase {
     protected WebDriver wd;
-
     public HelperBase(WebDriver wd) {
         this.wd = wd;
     }
@@ -20,10 +19,14 @@ public class HelperBase {
         wd.findElement(locator).clear();
         wd.findElement(locator).sendKeys(text);
     }
+    
+//    public void closeAlert(){
+//        wd.switchTo().alert().accept();
+//    }
 
     public boolean isAlertPresent() {
         try {
-            wd.switchTo().alert();
+            wd.switchTo().alert().accept();
             return true;
         } catch (NoAlertPresentException e) {
             return false;

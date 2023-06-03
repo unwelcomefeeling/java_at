@@ -14,21 +14,24 @@ public class SquareTests {
     }
 
     @Test
-    public void testPoint1(){
-        Point d = new Point(0,0,-182,20);
-        Assert.assertEquals(d.distance(), 183.09560344257315);
+    public void testPoint(){
+        Point p1 = new Point(0,0);
+        Point p2 = new Point(-182,20);
+        Assert.assertEquals(p1.distance(p2), 183.09560344257315);
     }
 
     @Test
-    public void testPoint(){
-        Point d = new Point(1,2,1,2);
-        Assert.assertEquals(d.distance(), 0.0);
+    public void testPoint1(){
+        Point p1 = new Point(1,2);
+        Point p2 = new Point(1, 2);
+        Assert.assertEquals(p1.distance(p2), 0.0);
 }
 
     @Test
     public void testPoint2(){
-        Point d = new Point(1,2,1,2);
-        Assert.assertEquals(d.distance(), 0.90);
+        Point p1 = new Point(255,2213);
+        Point p2 = new Point(15443, 59340);
+        Assert.assertEquals(p1.distance(p2), 59111.50034468758);
     }
 
 }
