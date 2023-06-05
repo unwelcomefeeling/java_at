@@ -21,9 +21,6 @@ public class ApplicationManager {
     private NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
 
-//    public ApplicationManager(String browser) {
-//        this.browser = browser;
-//    }
 
     public ApplicationManager(Browser browser) {
         this.browser = browser;
@@ -37,8 +34,7 @@ public class ApplicationManager {
         } else if (browser.equals(Browser.IE)) {
             wd = new InternetExplorerDriver();
         }
-       wd = new ChromeDriver();
-       wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+       wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
        wd.get("http://localhost/addressbook/");
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);

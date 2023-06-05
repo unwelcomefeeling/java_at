@@ -14,14 +14,4 @@ public class ContactDeletion extends TestBase {
     }
 }
 
-//driver.get("http://localhost/addressbook/");
-//        driver.findElement(By.linkText("home")).click();
-//        acceptNextAlert = true;
-//
-//        driver.findElement(By.id("9")).click();
-//        driver.findElement(By.xpath("//input[@value='Delete']")).click();
-//        assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
-//        driver.findElement(By.linkText("home")).click();
-//
-//        wd.switchTo().alert().accept();
 
