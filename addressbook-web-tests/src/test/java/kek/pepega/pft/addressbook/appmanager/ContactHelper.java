@@ -52,7 +52,6 @@ public class ContactHelper extends HelperBase {
     public void createContact(ContactData contact, boolean creation) {
         goToCreateNewContactPage();
         fillContactForm(contact, creation);
-        submitCreateContact();
     }
 
     public void goToCreateNewContactPage() {
