@@ -1,9 +1,6 @@
 package kek.pepega.pft.addressbook.appmanager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 
 public class HelperBase {
     protected WebDriver wd;
@@ -34,10 +31,10 @@ public class HelperBase {
         }
     }
 
-    protected boolean isElementPresent(By locator) {
+    public boolean isElementPresent(By locator) {
      try {
-        wd.findElements(locator);
-        return true;
+         wd.findElement(locator);
+         return true;
      }  catch (NoSuchElementException ex) {
          return false;
      }

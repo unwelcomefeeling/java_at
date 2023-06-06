@@ -13,20 +13,19 @@ public class ContactHelper extends HelperBase {
     }
 
     public void fillContactForm(ContactData contactData, boolean creation) {
-        type(By.name("firstname"), contactData.firstname());
-        type(By.name("middlename"), contactData.middlename());
-        type(By.name("lastname"), contactData.lastname());
-        type(By.name("nickname"), contactData.nickname());
-        type(By.name("title"), contactData.title());
-        type(By.name("company"), contactData.company());
-        type(By.name("address"), contactData.address());
-        type(By.name("mobile"), contactData.mobile());
-        type(By.name("email"), contactData.email());
-
+        type(By.name("firstname"), contactData.getFirstname());
+        type(By.name("middlename"), contactData.getMiddlename());
+        type(By.name("lastname"), contactData.getLastname());
+        type(By.name("nickname"), contactData.getNickname());
+        type(By.name("title"), contactData.getTitle());
+        type(By.name("company"), contactData.getCompany());
+        type(By.name("address"), contactData.getAddress());
+        type(By.name("mobile"), contactData.getMobile());
+        type(By.name("email"), contactData.getEmail());
         if (creation) {
-            new Select(wd.findElement(By.name("new"))).selectByVisibleText(contactData.group());
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
         } else {
-            Assert.assertFalse(isElementPresent(By.name("new")));
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
     }
 
@@ -39,7 +38,6 @@ public class ContactHelper extends HelperBase {
     }
 
     public void selectContact(int id) {
-
         wd.findElement(By.xpath("//input[@id='6']")).click();
     }
 
@@ -51,4 +49,17 @@ public class ContactHelper extends HelperBase {
     }
 
 
+    public void createContact(ContactData contact, boolean creation) {
+        goToCreateNewContactPage();
+        fillContactForm(contact, creation);
+        submitCreateContact();
+    }
+
+    public void goToCreateNewContactPage() {
+        click(By.linkText("add new"));
+    }
+
+    public boolean isThereAContact() {
+        return  isElementPresent(By.xpath("//input[@id='6']"));
+    }
 }
